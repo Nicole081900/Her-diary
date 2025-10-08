@@ -10,7 +10,7 @@ st.set_page_config(page_title="我的日记", page_icon="📔", layout="centered
 
 # 背景图片（可换 URL）
 bg_url = st.text_input("背景图片 URL（留空使用默认）",
-                       value="https://images.unsplash.com/photo-1503264116251-35a269479413")
+                      value="https://i.imgur.com/abcd1234.png"
 
 # CSS 背景安全写法
 st.markdown(
