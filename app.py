@@ -102,3 +102,20 @@ if os.path.exists(diary_file):
         st.markdown("---")
 else:
     st.info("目前没有日记。")
+  for i, entry in enumerate(reversed(data[-10:])):
+    st.write(f"📅 {entry['date']}    评分：{entry['score']}")
+    st.write(entry['note'])
+    if entry.get("image"):
+        try:
+            img = Image.open(entry["image"])
+            st.image(img, width=300)
+        except Exception:
+            st.write("（显示图片失败）")
+    # 删除按钮
+    if st.button(f"删除这条日记 {i}"):
+        # 删除对应条目
+        del data[len(data)-10+i]  # 注意索引调整
+        with open(diary_file, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        st.experimental_rerun()
+    st.markdown("---")
