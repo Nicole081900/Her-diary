@@ -137,12 +137,3 @@ settings["bg_url"] = bg_url
 os.makedirs("data", exist_ok=True)
 with open(settings_file, "w", encoding="utf-8") as f:
     json.dump(settings, f, ensure_ascii=False, indent=2)
-  # 可选的 meme 列表
-memes = {
-    "思考熊": "https://i.imgur.com/5c7ff883.png",  # 你上传的图片，需要先上传到 imgur
-    "笑脸": "https://i.imgur.com/xxxxxx.png"
-}
-
-selected_meme = st.selectbox("插入表情", list(memes.keys()))
-if selected_meme != "None":
-    st.write(f"![{selected_meme}]({memes[selected_meme]})")  # 显示在页面上
