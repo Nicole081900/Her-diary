@@ -119,3 +119,30 @@ else:
             json.dump(data, f, ensure_ascii=False, indent=2)
         st.experimental_rerun()
     st.markdown("---")
+    # 读取上次背景
+settings_file = "data/settings.json"
+if os.path.exists(settings_file):
+    with open(settings_file, "r", encoding="utf-8") as f:
+        settings = json.load(f)
+else:
+    settings = {}
+
+bg_url = st.text_input(
+    "背景图片 URL（留空使用默认）",
+    value=settings.get("bg_url", "https://images.unsplash.com/photo-1503264116251-35a269479413")
+)
+
+# 保存用户选择的背景
+settings["bg_url"] = bg_url
+os.makedirs("data", exist_ok=True)
+with open(settings_file, "w", encoding="utf-8") as f:
+    json.dump(settings, f, ensure_ascii=False, indent=2)
+  # 可选的 meme 列表
+memes = {
+    "思考熊": "https://i.imgur.com/5c7ff883.png",  # 你上传的图片，需要先上传到 imgur
+    "笑脸": "https://i.imgur.com/xxxxxx.png"
+}
+
+selected_meme = st.selectbox("插入表情", list(memes.keys()))
+if selected_meme != "None":
+    st.write(f"![{selected_meme}]({memes[selected_meme]})")  # 显示在页面上
